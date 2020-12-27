@@ -1,0 +1,8 @@
+Find the albums with 12 or more tracks.
+
+select albumid, count(*) as C
+from tracks
+group by albumid 
+having count(*) >= 12;
+
+--count(*) as finding total count for each id 
