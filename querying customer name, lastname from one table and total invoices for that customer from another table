@@ -1,0 +1,7 @@
+select firstname, lastname, customerid,
+(select count(*) as C
+from invoices
+where invoices.CustomerId = 
+customers.CustomerId) as Inv 
+from customers
+order by firstname;
