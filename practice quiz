@@ -1,0 +1,34 @@
+1- How many albums does the artist Led Zeppelin
+have?
+
+select a.title, a.artistid, ar.name
+from albums a left join artists ar on
+a.artistid = ar.artistid
+where ar.name = 'Led Zeppelin';
+
+2 - Create a list of album titles and the unit prices for the artist "Audioslave"
+
+select a.name, c.unitPrice,b.title, c.name
+from (
+(artists a inner join albums b 
+on a.artistid = b.artistid) inner join 
+tracks c on c.albumid = b.albumid) 
+where a.name = 'Audioslave';
+
+3 - Find the first and last name of any customer who
+does not have an invoice. Are there any customers returned from the query? 
+
+select firstname, lastname 
+from ( (invoices i inner join customers c on i.customerid = c.customerid)) 
+where invoiceid = NULL;
+
+4 - Find the total price for each album.
+
+select a.albumid, a.title, sum(unitprice)
+from albums a inner join tracks t on a.albumid = t.albumid
+where title = 'Big Ones';
+
+5 - How many records are created when you apply a Cartesian join to the invoice and invoice items table?
+
+select * from 
+invoices cross join invoice_items;
