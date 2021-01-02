@@ -1,0 +1,92 @@
+1 - Using a subquery, find the names of all the tracks for the album "Californication".
+select name, 
+albumid 
+from tracks 
+where albumid in (select albumid 
+from albums
+where title = 'Californication');
+
+2 - Find the total number of invoices for each customer along with the customer's full name, city and email.
+select c.firstname, 
+c.lastname,
+c.city,
+c.email,
+count(i.invoiceid)
+from customers c 
+inner join invoices i on c.customerid = i.customerid
+group by c.customerid;
+
+3 - Retrieve the track name, album, artistID, and trackID for all the albums.
+select a.title,
+a.artistid, 
+t.name,
+t.TrackId
+from albums a inner join tracks t on a.albumid = t.albumid
+where trackid = 12;
+
+4- Retrieve a list with the managers last name, and the last name of the employees who report to him or her
+After running the query described above, who are the reports for the manager named Mitchell (select all that apply)?
+
+select lastname, employeeid, reportsto, title
+from employees e 
+where reportsto = 6; 
+
+
+5 - Find the name and ID of the artists who do not have albums. After running the query described above, two of the records returned have the same last name. Enter that name below.
+select a.name, a.artistid 
+,b.title 
+from artists a
+left join albums b on 
+a.artistid = b.artistid 
+where b.title IS NULL;
+
+6 - Use a UNION to create a list of all the employee's and customer's first names and last names ordered by the last name in descending order
+.
+Question 6
+
+All of the questions in this quiz refer to the open source Chinook Database. Please familiarize yourself with the ER diagram in order to familiarize yourself with the table and column names in order to write accurate queries and get the appropriate answers.
+
+Use a UNION to create a list of all the employee's and customer's first names and last names ordered by the last name in descending order.
+
+1
+2
+3
+4
+5
+6
+
++--------------+-----------+
+| lastname     | firstname |
++--------------+-----------+
+| Zimmermann   | Fynn      |
+| Wójcik       | Stanisław |
+| Wichterlová  | František |
+| Van der Berg | Johannes  |
+| Tremblay     | François  |
+| Taylor       | Mark      |
+| Sullivan     | Ellie     |
+| Stevens      | Victor    |
+| Srivastava   | Puja      |
+| Smith        | Jack      |
++--------------+-----------+
+(Output limit exceeded, 10 of 67 total rows shown)
+
+After running the query described above, determine what is the last name of the 6th record? Enter it below. Remember to order things in descending order to be sure to get the correct answer.
+select lastname, firstname 
+from employees 
+union 
+select lastname, firstname
+from customers
+order by lastname desc;
+
+
+7 - See if there are any customers who have a 
+different city listed in their billing city versus their customer city.
+
+SELECT C.FirstName, C.LastName
+FROM Customers c
+INNER JOIN Invoices i
+ON c.CustomerId = i.CustomerId
+WHERE c.city != i.BillingCity
+
+
